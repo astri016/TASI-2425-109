@@ -1,41 +1,43 @@
 # TASI-2425-109
 
-# Hybrid ARIMA-LSTM with Attention Mechanism for Student Stress Prediction
+# A Hybrid ARIMA-LSTM with Attention for Student Stress Prediction using Physiological Time-Series
 
 ## Overview
 
-This repository contains the code and resources for the final research project that utilizes a hybrid ARIMA-LSTM model with an attention mechanism to predict student stress levels based on multivariate time-series data. The main goal of the project is to improve the accuracy of stress level prediction for students by integrating physiological indicators such as Galvanic Skin Response (GSR), Sleep Hours, Anxiety Level, and Mood Score. The model aims to leverage both ARIMA for capturing linear trends and LSTM with attention for non-linear and temporal dependencies in the data.
+This repository contains the code and resources for the final research project that implements a hybrid forecasting model combining ARIMA and LSTM with an Attention mechanism. The model is designed to predict student stress levels using physiological time-series data such as Galvanic Skin Response (GSR), Sleep Hours, Anxiety Level, and Mood Score. The main goal is to enhance time-series forecasting accuracy by leveraging both statistical and deep learning methods, enriched with an attention layer for improved temporal feature weighting.
 
-## Research Focus
+## Proposed Model Architecture
+### Hybrid ARIMA–LSTM with Attention
+* Model Components:
+  - ARIMA: Utilized for modeling and forecasting stationary time-series components (e.g., GSR).
+  - LSTM: Used for capturing non-linear dependencies in multivariate physiological data.
+  - Attention Layer: Integrated into the LSTM model to focus on important time steps and improve prediction performance.
 
-The research focuses on the development of a hybrid ARIMA-LSTM model with an attention mechanism to predict student stress levels. The attention mechanism helps the model focus on the most relevant parts of the data to improve the prediction accuracy and interpretability of the model. The dataset used includes physiological data collected from students over time to understand how factors like sleep, mood, and anxiety levels influence stress.
+## Forecasting Workflow
+* Data Preprocessing:
+  - Handling missing values, normalization, and time-series differencing for stationarity checks.
+  - Splitting data into training and testing sets based on time blocks.
+* ARIMA Forecasting:
+  - Using Auto-ARIMA to determine optimal p, d, q parameters.
+  - Forecasting stationary univariate series (GSR).
+* LSTM with Attention Forecasting:
+  - Modeling non-stationary multivariate features (Sleep Hours, Anxiety Level, Mood Score).
+  - Applying attention mechanism to assign higher weights to important time steps.
+* Hybrid Prediction:
+  - Combining ARIMA predictions (for GSR) with LSTM+Attention predictions (for other features) to produce final multi-feature forecasts.
 
-## Features
-
-- **ARIMA Model**: Captures linear trends and seasonal patterns in the time-series data.
-- **LSTM Model**: Focuses on learning long-term dependencies and nonlinear relationships in the data.
-- **Attention Mechanism**: Prioritizes the most relevant data points in the sequence to improve prediction accuracy.
-- **Multivariate Time-Series Data**: Includes variables such as GSR, sleep hours, anxiety level, and mood score.
-- **Student Stress Prediction**: Predicts the stress level based on historical physiological data.
-
+## Fine-Tuning and Customization
+* Hyperparameter Optimization:
+  - Adjusting learning rate, dropout rate, batch size, and attention dimensions to minimize loss and maximize accuracy.
+* Evaluation Metrics:
+  - Mean Absolute Error (MAE)
+  - Root Mean Squared Error (RMSE)
+    
 ## Dataset
-
-The dataset used in this research contains physiological data of students, including the following attributes:
-- **Student ID**: Unique identifier for each student.
-- **Date**: Date of data recording.
-- **Class Time**: The time range during which the student attended class.
-- **Attendance Status**: Whether the student was present, absent, or late.
-- **Stress Level (GSR)**: Stress level measured by Galvanic Skin Response (GSR).
-- **Sleep Hours**: The number of hours the student slept before class.
-- **Anxiety Level**: The anxiety level of the student.
-- **Mood Score**: The emotional condition of the student during the class.
-- **Risk Level**: Health and engagement risk category (Low, Medium, High).
-  
+The dataset used in this research contains physiological data of students, including:
+* Galvanic Skin Response (GSR)
+* Sleep Duration
+* Anxiety Scores
+* Mood Scores
 You can access the dataset [here](https://www.kaggle.com/datasets/ziya07/student-health-and-attendance-data/data).
 
-
-## Methodology
-
-1. **Data Preprocessing**: The data is processed by handling missing values, normalizing features, and splitting it into training and testing sets.
-2. **Model Development**: The ARIMA model captures linear trends, while the LSTM model captures long-term dependencies and nonlinearities. The attention mechanism is integrated to allow the model to focus on the most relevant time steps.
-3. **Evaluation**: The model's performance is evaluated using metrics such as MAE (Mean Absolute Error) and RMSE (Root Mean Squared Error).
